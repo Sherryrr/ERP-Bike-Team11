@@ -1,3 +1,10 @@
+
+/**
+ * Service layer for managing customer shipping information.
+ * This class provides methods for creating, updating, and deleting customer information.
+ * It interacts with the `CustomerRepository` to perform database operations.
+ */
+
 package com.soen390.team11.service;
 
 import com.soen390.team11.constant.LogTypes;
@@ -35,9 +42,12 @@ public class CustomerShippingService {
      * @param customerShippingDto address information
      * @return customer id
      */
+    
+    // Updates the customer's information based on the provided CustomerShippingDto
     public String updateCustomer(CustomerShippingDto customerShippingDto) {
         logService.writeLog(LogTypes.USERS, "Updating customer...");
         Optional<Customer> optionalCustomer = customerRepository.findByCustomerID(customerShippingDto.getCustomerID());
+        // Checks if the customer exists and updates their information if present, otherwise returns an error message
         if (optionalCustomer.isPresent()) {
             logService.writeLog(LogTypes.USERS, "Setting customer's information");
             optionalCustomer.get().setFirstname(customerShippingDto.getFirstname());
