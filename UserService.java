@@ -1,3 +1,9 @@
+
+/*
+ * The `UserService` class serves as the service layer for managing user-related operations in the ERP Bike System.
+ * It provides methods for creating, updating, and retrieving user accounts, as well as loading user details for authentication.
+ */
+
 package com.soen390.team11.service;
 
 import com.soen390.team11.constant.LogTypes;
@@ -38,9 +44,12 @@ public class UserService implements UserDetailsService {
      *
      * @param userAccountDto User information
      */
+    
+    // Creates a new user account with the provided user information and determines the role based on the given UserAccountDto.
     public void createUser(UserAccountDto userAccountDto) {
         logService.writeLog(LogTypes.USERS, "Creating a new user");
         String role = "";
+        // Checks if the user role is specified in the UserAccountDto. If not, assigns the role as "CUSTOMER". Otherwise, checks if the role is "admin" (case-insensitive) and assigns the role as "ADMIN" if true, otherwise assigns it as "CUSTOMER".
         if (userAccountDto.getRole() == null) {
             role = Role.CUSTOMER.toString();
         } else {
